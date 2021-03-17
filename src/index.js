@@ -1,6 +1,6 @@
-function newCity(location) {
-  city.innerHTML = `${location.value}`;
-  switchCity(location.value);
+function newCity(cityName) {
+  city.innerHTML = `${cityName.value}`;
+  switchCity(cityName.value);
 }
 
 function switchCity(place) {
