@@ -1,8 +1,4 @@
-//Api weather city search
-
-function newCity(event) {
-  event.preventDefault();
-  console.log(location.value);
+function newCity(location) {
   city.innerHTML = `${location.value}`;
   switchCity(location.value);
 }
