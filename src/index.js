@@ -19,7 +19,7 @@ function showWeather(response) {
 }
 
 let city = document.querySelector("#current-city");
-let location = document.querySelector(".form-control");
+let cityName = document.querySelector(".form-control");
 let changeCity = document.querySelector("form");
 changeCity.addEventListener("submit", newCity);
 
@@ -39,9 +39,8 @@ function showTemp(response) {
   heading.innerHTML = `${geoTemp}`;
 }
 
-function searchMe(event) {
+function searchMe() {
   navigator.geolocation.getCurrentPosition(geoWeather);
-  alert("hi");
 }
 
 let myPosition = document.querySelector("#locate-me");
