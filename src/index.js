@@ -1,13 +1,14 @@
 function newCity(event) {
   event.preventDefault();
-  console.log(cityName.value);
-  city.innerHTML = `${cityName.value}`;
-  switchCity(cityName.value); 
+  let cityName = citySearch.value;
+  console.log(cityName);
+  city.innerHTML = `${citySearch.value}`;
+  switchCity(cityName); 
 }
 
 function switchCity() {
   let apiKey = `e2786f41f0156622c468940e038a0042`;
-  let weatherData = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+  let weatherData = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch.value}&appid=${apiKey}&units=metric`;
   axios.get(weatherData).then(showWeather);
 }
 
@@ -19,7 +20,7 @@ function showWeather(response) {
 }
 
 let city = document.querySelector("#current-city");
-let cityName = document.querySelector(".form-control");
+let citySearch = document.querySelector(".form-control");
 let changeCity = document.querySelector("form");
 changeCity.addEventListener("submit", newCity);
 
