@@ -1,12 +1,12 @@
-function newCity(cityName) {
+function newCity(event) {
+  event.preventDefault();
+  console.log(cityName.value);
   city.innerHTML = `${cityName.value}`;
-  switchCity(cityName.value);
+  switchCity(cityName.value); 
 }
 
-function switchCity(place) {
+function switchCity() {
   let apiKey = `e2786f41f0156622c468940e038a0042`;
-  let cityName = place;
-  console.log(place);
   let weatherData = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
   axios.get(weatherData).then(showWeather);
 }
