@@ -1,6 +1,6 @@
 body {
   background: #faf2f2;
-  max-width: 400px;
+  max-width: 440px;
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
@@ -71,7 +71,7 @@ a {
 #locate-me {
   display: inline;
   position: relative;
-  left: 110px;
+  left: 150px;
   bottom: 35px;
   margin: 0;
   padding: 5px;

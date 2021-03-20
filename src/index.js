@@ -25,8 +25,8 @@ let changeCity = document.querySelector("form");
 changeCity.addEventListener("submit", newCity);
 
 function geoWeather(position) {
-  let lat = Math.round(position.coords.latitude);
-  let lon = Math.round(position.coords.longitude);
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
   console.log(lat);
   console.log(lon);
   let myKey = `e2786f41f0156622c468940e038a0042`;
@@ -38,6 +38,8 @@ function showTemp(response) {
   let geoTemp = Math.round(response.data.main.temp);
   let heading = document.querySelector("#degree");
   heading.innerHTML = `${geoTemp}`;
+  console.log([response.data.name]);
+  city.innerHTML = response.data.name;
 }
 
 function searchMe() {
