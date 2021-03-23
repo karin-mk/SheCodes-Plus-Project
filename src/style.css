@@ -1,6 +1,13 @@
-body {
+.link-align {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.box {
+  display: block;
+  margin: 0 auto;
   background: #faf2f2;
-  max-width: 440px;
+  max-width: 500px;
   border-radius: 5px;
   border-width: 1px;
   border-style: solid;
@@ -11,14 +18,14 @@ h1 {
   padding-top: 20px;
   font-family: "Dancing Script", cursive;
   color: #ff2e63;
-  font-size: 60px;
+  font-size: 50px;
   margin-bottom: 0;
   margin-left: 15px;
 }
 
 h2 {
   padding-top: 20px;
-  font-size: 50px;
+  font-size: 40px;
   color: #ff2e63;
   font-family: "Dancing Script", cursive;
   position: relative;
@@ -61,7 +68,8 @@ a {
 
 .form-group {
   padding-top: 20px;
-  max-width: 300px;
+  padding-left: 55px;
+  max-width: 400px;
 }
 
 .form-group p {
@@ -71,7 +79,7 @@ a {
 #locate-me {
   display: inline;
   position: relative;
-  left: 150px;
+  left: 200px;
   bottom: 35px;
   margin: 0;
   padding: 5px;
@@ -91,10 +99,10 @@ a {
   display: inline;
   position: relative;
   top: -54px;
-  left: 300px;
+  left: 395px;
 }
 
-.col-7 {
+.col-5 {
   color: #9d65c9;
 }
 
@@ -120,4 +128,9 @@ a {
 
 .partly-sunny {
   color: #ffa5a5;
+}
+
+.link-align {
+  display: block;
+  margin: 30px auto;
 }

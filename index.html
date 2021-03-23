@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width", initial-scale=1.0" />
-    <title>Homework Week Five</title>
+    <title>Karin's Weather App</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Tangerine:wght@700&display=swap"
@@ -21,117 +21,130 @@
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <h1 id="current-city">Paris</h1>
-        </div>
-        <div class="col-6">
-          <h2>
-            <span id="degree">15</span>
-            <small
-              ><a href="#" id="degree-celsius">°C</a> |
-              <a href="#" id="degree-fahrenheit">°F</a></small
-            >
-            ☀️
-          </h2>
-        </div>
-      </div>
-      <p id="time-now"></p>
-      <br />
-      <div class="row today">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <p>
-                <strong>3pm</strong> <br />
-                16°C 🌤
-              </p>
+      <div class="link-align">
+        <div class="box">
+          <div class="row">
+            <div class="col-7">
+              <h1 id="current-city">Paris</h1>
+            </div>
+            <div class="col-5">
+              <h2>
+                <span id="degree">15</span>
+                <small
+                  ><a href="#" id="degree-celsius">°C</a> |
+                  <a href="#" id="degree-fahrenheit">°F</a></small
+                >
+                ☀️
+              </h2>
+            </div>
+          </div>
+          <p id="time-now"></p>
+          <br />
+          <div class="row today">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <p>
+                    <strong>3pm</strong> <br />
+                    16°C 🌤
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <p>
+                    <strong>5pm</strong> <br />
+                    14°C ☀️
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <p>
+                    <strong>7pm</strong> <br />
+                    11°C 🌃
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form>
+            <div class="form-group">
+              <p class="text-center">Which city do you want to go to?</p>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter city"
+              />
+            </div>
+            <button type="submit" class="btn btn-default" class="search-button">
+              🔍
+            </button>
+          </form>
+          <button id="locate-me">Locate me</button>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-5">Monday</div>
+            <div class="col-1">
+              <p class="sunny">☀️</p>
+            </div>
+            <div class="col-4">
+              <p class="sunny">12°C | 7°C</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-5">Tuesday</div>
+            <div class="col-1">
+              <p class="cloudy">☁️</p>
+            </div>
+            <div class="col-4">
+              <p class="cloudy">9°C | 5°C</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-5">Wednesday</div>
+            <div class="col-1">
+              <p class="rainy">🌧</p>
+            </div>
+            <div class="col-4">
+              <p class="rainy">5°C | 1°C</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-5">Thursday</div>
+            <div class="col-1">
+              <p class="snow">❄️</p>
+            </div>
+            <div class="col-4">
+              <p class="snow">3°C | -3°C</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-5">Friday</div>
+            <div class="col-1">
+              <p class="partly-sunny">⛅️</p>
+            </div>
+            <div class="col-4">
+              <p class="partly-sunny">7°C | 4°C</p>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <p>
-                <strong>5pm</strong> <br />
-                14°C ☀️
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <p>
-                <strong>7pm</strong> <br />
-                11°C 🌃
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <form>
-        <div class="form-group">
-          <p class="text-center">Which city do you want to go to?</p>
-          <input type="text" class="form-control" placeholder="Enter city" />
-        </div>
-        <button type="submit" class="btn btn-default" class="search-button">
-          🔍
-        </button>
-      </form>
-      <button id="locate-me">Locate me</button>
-      <div class="row">
-        <div class="col-7">Monday</div>
-        <div class="col-1">
-          <p class="sunny">☀️</p>
-        </div>
-        <div class="col-4">
-          <p class="sunny">12°C | 7°C</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-7">Tuesday</div>
-        <div class="col-1">
-          <p class="cloudy">☁️</p>
-        </div>
-        <div class="col-4">
-          <p class="cloudy">9°C | 5°C</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-7">Wednesday</div>
-        <div class="col-1">
-          <p class="rainy">🌧</p>
-        </div>
-        <div class="col-4">
-          <p class="rainy">5°C | 1°C</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-7">Thursday</div>
-        <div class="col-1">
-          <p class="snow">❄️</p>
-        </div>
-        <div class="col-4">
-          <p class="snow">3°C | -3°C</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-7">Friday</div>
-        <div class="col-1">
-          <p class="partly-sunny">⛅️</p>
-        </div>
-        <div class="col-4">
-          <p class="partly-sunny">7°C | 4°C</p>
-        </div>
+        <p class="float-left">
+          <a href="https://github.com/karin-mk/SheCodes-Plus-Project"
+            >Open-Sourced Code
+          </a>
+          by Karin Kappler
+        </p>
       </div>
     </div>
-    <p>
-      <a href="https://github.com/karin-mk/SheCodes-Plus-Project"
-        >Open-Sourced Code
-      </a>
-      by Karin Kappler
-    </p>
     <script src="src/index.js"></script>
   </body>
 </html>
