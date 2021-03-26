@@ -12,11 +12,29 @@ function switchCity() {
   axios.get(weatherData).then(showWeather);
 }
 
+function sunsetConversion(milliseconds) {
+  let sunsetTime = new Date(milliseconds);
+  let sunsetHour = sunsetTime.getHours();
+  let sunsetMinutes = sunsetTime.getMinutes();
+  return `Sunset: ${sunsetHour}:${sunsetMinutes}`;
+}
+
+
 function showWeather(response) {
   console.log(response);
   let deg = Math.round([response.data.main.temp]);
   let temp = document.querySelector("#degree");
+  let humidity = document.querySelector("#humidity-perc");
+  let sunset = document.querySelector("#sunset");
+  let feelsLikeTemp = document.querySelector("#feels-like-temp");
+  let iconCode = (response.data.weather[0].icon);
+  let weatherIcon = document.querySelector("img");
+
   temp.innerHTML = `${deg}`;
+  humidity.innerHTML = `Humidity: ${[response.data.main.humidity]}%`;
+  feelsLikeTemp.innerHTML = `Feels like: ${Math.round([response.data.main.feels_like])}°C`;
+  sunset.innerHTML = sunsetConversion(response.data.sys.sunset * 1000);
+  weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
 }
 
 let city = document.querySelector("#current-city");

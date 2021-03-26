@@ -36,6 +36,19 @@ small {
   font-size: 14px;
 }
 
+ul {
+  padding-top: 10px;
+  text-align: center;
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+  display: inline;
+  margin: 20px;
+  color: #ff2e63;
+}
+
 #time-now {
   padding-top: 7px;
   margin: 0;
