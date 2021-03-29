@@ -6,7 +6,7 @@
 .box {
   display: block;
   margin: 0 auto;
-  background: #faf2f2;
+  background: #fcf5f594;
   max-width: 500px;
   border-radius: 5px;
   border-width: 1px;
@@ -15,7 +15,10 @@
 }
 
 h1 {
+  position: relative;
+  top: 15px;
   padding-top: 20px;
+  padding-left: 3px;
   font-family: "Dancing Script", cursive;
   color: #ff2e63;
   font-size: 50px;
@@ -32,10 +35,6 @@ h2 {
   top: 8px;
 }
 
-small {
-  font-size: 14px;
-}
-
 ul {
   padding-top: 10px;
   text-align: center;
@@ -49,6 +48,11 @@ li {
   color: #ff2e63;
 }
 
+h2 small {
+  font-size: 15px;
+  color: #ff2e63;
+}
+
 #time-now {
   padding-top: 7px;
   margin: 0;
@@ -59,6 +63,17 @@ li {
 
 a {
   color: #ff2e63;
+}
+
+.active {
+  font-size: 14px;
+  color: #47007e;
+}
+
+.active:hover {
+  text-decoration: none;
+  color: #9d65c9;
+  cursor: default;
 }
 
 .card-body {
@@ -113,6 +128,11 @@ a {
   position: relative;
   top: -54px;
   left: 395px;
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: #d4d4d4;
 }
 
 .col-5 {

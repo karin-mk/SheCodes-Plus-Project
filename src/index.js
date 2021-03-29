@@ -2,7 +2,7 @@ function newCity(event) {
   event.preventDefault();
   let cityName = citySearch.value;
   console.log(cityName);
-  city.innerHTML = `${citySearch.value}`;
+  city.innerHTML = ` ${citySearch.value}`;
   switchCity(cityName); 
 }
 
@@ -19,7 +19,6 @@ function sunsetConversion(milliseconds) {
   return `Sunset: ${sunsetHour}:${sunsetMinutes}`;
 }
 
-
 function showWeather(response) {
   console.log(response);
   let deg = Math.round([response.data.main.temp]);
@@ -30,6 +29,7 @@ function showWeather(response) {
   let iconCode = (response.data.weather[0].icon);
   let weatherIcon = document.querySelector("img");
 
+  celsiusTemperature = deg;
   temp.innerHTML = `${deg}`;
   humidity.innerHTML = `Humidity: ${[response.data.main.humidity]}%`;
   feelsLikeTemp.innerHTML = `Feels like: ${Math.round([response.data.main.feels_like])}°C`;
@@ -70,13 +70,19 @@ myPosition.addEventListener("click", searchMe);
 //Change Unit
 function convertCelsius(event) {
   event.preventDefault();
-  temperature.innerHTML = "15";
+  temperature.innerHTML = celsiusTemperature;
+  changeCelsius.classList.remove("active");
+  changeFahrenheit.classList.add("active");
 }
 function convertFahrenheit(event) {
   event.preventDefault();
-  temperature.innerHTML = "59";
+  let tempFahrenheit = Math.round((celsiusTemperature * 9) / 5 + 32) ;
+  temperature.innerHTML = tempFahrenheit;
+  changeCelsius.classList.add("active");
+  changeFahrenheit.classList.remove("active");
 }
 
+let celsiusTemperature = null;
 let temperature = document.querySelector("#degree");
 let changeCelsius = document.querySelector("#degree-celsius");
 changeCelsius.addEventListener("click", convertCelsius);
