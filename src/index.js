@@ -9,7 +9,9 @@ function newCity(event) {
 function switchCity() {
   let apiKey = `e2786f41f0156622c468940e038a0042`;
   let weatherData = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch.value}&appid=${apiKey}&units=metric`;
+  let hourlyForecastDate = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearch.value}&cnt=3&appid=${apiKey}&units=metric`
   axios.get(weatherData).then(showWeather);
+  axios.get(hourlyForecastDate).then(showHourlyForecast);
 }
 
 function sunsetConversion(milliseconds) {
@@ -37,6 +39,55 @@ function showWeather(response) {
   weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
 }
 
+function hourlyForecastConversion(milliseconds) {
+let forecastTime = new Date(milliseconds);
+let forecastHour = forecastTime.getHours();
+return `${forecastHour}:00`
+}
+
+
+function showHourlyForecast(response) {
+  console.log(response);
+
+let timestampOne = (response.data.list[0].dt * 1000);
+let timestampTwo = (response.data.list[1].dt * 1000);
+let timestampThree = (response.data.list[2].dt * 1000);
+console.log(response.data.list[0]);
+ 
+let forecastTimestampOne = document.querySelector("#timestamp-1");
+let forecastTimestampTwo = document.querySelector("#timestamp-2");
+let forecastTimestampThree = document.querySelector("#timestamp-3");
+
+forecastTimestampOne.innerHTML = hourlyForecastConversion(timestampOne);
+forecastTimestampTwo.innerHTML = hourlyForecastConversion(timestampTwo);
+forecastTimestampThree.innerHTML = hourlyForecastConversion(timestampThree);
+
+let timestampOneTemp = Math.round(response.data.list[0].main.temp);
+let timestampTwoTemp = Math.round(response.data.list[1].main.temp);
+let timestampThreeTemp = Math.round(response.data.list[2].main.temp);
+
+let forecastTimestampOneTemp = document.querySelector("#hourly-forecast-temp-1");
+let forecastTimestampTwoTemp = document.querySelector("#hourly-forecast-temp-2");
+let forecastTimestampThreeTemp = document.querySelector("#hourly-forecast-temp-3");
+
+forecastTimestampOneTemp.innerHTML = `${timestampOneTemp} °C`
+forecastTimestampTwoTemp.innerHTML = `${timestampTwoTemp}°C` 
+forecastTimestampThreeTemp.innerHTML = `${timestampThreeTemp}°C` 
+
+let timestampOneIconCode = (response.data.list[0].weather[0].icon);
+let timestampTwoIconCode = (response.data.list[1].weather[0].icon);
+let timestampThreeIconCode = (response.data.list[2].weather[0].icon);
+
+let hourlyIconOne = document.querySelector("#hourly-forecast-icon-1");
+let hourlyIconTwo = document.querySelector("#hourly-forecast-icon-2");
+let hourlyIconThree = document.querySelector("#hourly-forecast-icon-3");
+
+hourlyIconOne.setAttribute("src", `http://openweathermap.org/img/wn/${timestampOneIconCode}@2x.png`);
+hourlyIconTwo.setAttribute("src", `http://openweathermap.org/img/wn/${timestampTwoIconCode}@2x.png`);
+hourlyIconThree.setAttribute("src", `http://openweathermap.org/img/wn/${timestampThreeIconCode}@2x.png`);
+}
+
+
 let city = document.querySelector("#current-city");
 let citySearch = document.querySelector(".form-control");
 let changeCity = document.querySelector("form");
@@ -49,7 +100,9 @@ function geoWeather(position) {
   console.log(lon);
   let myKey = `e2786f41f0156622c468940e038a0042`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${myKey}&units=metric`;
+  let geoForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=3&appid=${myKey}&units=metric`;
   axios.get(apiUrl).then(showTemp);
+  axios.get(geoForecastUrl).then(showHourlyForecast);
 }
 
 function showTemp(response) {

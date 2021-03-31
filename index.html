@@ -30,10 +30,14 @@
             <div class="col-6">
               <h2>
                 <span id="degree">15</span>
-                <small> 
+                <small>
                   <a href="#" class="active" id="degree-celsius">°C</a> |
-                  <a href="#" id="degree-fahrenheit">°F</a></small>
-                <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather icon"></img>
+                  <a href="#" id="degree-fahrenheit">°F</a></small
+                >
+                <img
+                  src="https://openweathermap.org/img/wn/10d@2x.png"
+                  alt="weather icon"
+                />
               </h2>
             </div>
           </div>
@@ -49,8 +53,14 @@
               <div class="card">
                 <div class="card-body">
                   <p>
-                    <strong>3pm</strong> <br />
-                    16°C 🌤
+                    <strong id="timestamp-1">2pm</strong> <br />
+                    <span id="hourly-forecast-temp-1">16°C</span>
+                    <img
+                      id="hourly-forecast-icon-1"
+                      src="https://openweathermap.org/img/wn/09d@2x.png"
+                      width="49px"
+                      alt="weather forecast icon"
+                    />
                   </p>
                 </div>
               </div>
@@ -59,8 +69,14 @@
               <div class="card">
                 <div class="card-body">
                   <p>
-                    <strong>5pm</strong> <br />
-                    14°C ☀️
+                    <strong id="timestamp-2">5pm</strong> <br />
+                    <span id="hourly-forecast-temp-2">14°C</span>
+                    <img
+                      id="hourly-forecast-icon-2"
+                      src="https://openweathermap.org/img/wn/09d@2x.png"
+                      width="49px"
+                      alt="weather forecast icon"
+                    />
                   </p>
                 </div>
               </div>
@@ -69,8 +85,14 @@
               <div class="card">
                 <div class="card-body">
                   <p>
-                    <strong>7pm</strong> <br />
-                    11°C 🌃
+                    <strong id="timestamp-3">8pm</strong> <br />
+                    <span id="hourly-forecast-temp-3">11°C</span>
+                    <img
+                      id="hourly-forecast-icon-3"
+                      src="https://openweathermap.org/img/wn/09d@2x.png"
+                      width="49px"
+                      alt="weather forecast icon"
+                    />
                   </p>
                 </div>
               </div>
@@ -91,50 +113,70 @@
           </form>
           <button id="locate-me">Locate me</button>
           <div class="row">
-            <div class="col-2"></div>
-            <div class="col-5">Monday</div>
-            <div class="col-1">
-              <p class="sunny">☀️</p>
+            <div class="col-1"></div>
+            <div class="col-5 forecast-weekday">Monday</div>
+            <div class="col-2">
+              <img
+                src="https://openweathermap.org/img/wn/09d@2x.png"
+                width="44px"
+                alt="weather forecast icon"
+              />
             </div>
             <div class="col-4">
               <p class="sunny">12°C | 7°C</p>
             </div>
           </div>
           <div class="row">
-            <div class="col-2"></div>
-            <div class="col-5">Tuesday</div>
-            <div class="col-1">
-              <p class="cloudy">☁️</p>
+            <div class="col-1"></div>
+            <div class="col-5 forecast-weekday">Tuesday</div>
+            <div class="col-2">
+              <img
+                src="https://openweathermap.org/img/wn/09d@2x.png"
+                width="44px"
+                alt="weather forecast icon"
+              />
             </div>
             <div class="col-4">
               <p class="cloudy">9°C | 5°C</p>
             </div>
           </div>
           <div class="row">
-            <div class="col-2"></div>
-            <div class="col-5">Wednesday</div>
-            <div class="col-1">
-              <p class="rainy">🌧</p>
+            <div class="col-1"></div>
+            <div class="col-5 forecast-weekday">Wednesday</div>
+            <div class="col-2">
+              <img
+                src="https://openweathermap.org/img/wn/09d@2x.png"
+                width="44px"
+                alt="weather forecast icon"
+              />
             </div>
             <div class="col-4">
               <p class="rainy">5°C | 1°C</p>
             </div>
           </div>
           <div class="row">
-            <div class="col-2"></div>
-            <div class="col-5">Thursday</div>
-            <div class="col-1">
-              <p class="snow">❄️</p>
+            <div class="col-1"></div>
+            <div class="col-5 forecast-weekday">Thursday</div>
+            <div class="col-2">
+              <img
+                src="https://openweathermap.org/img/wn/09d@2x.png"
+                width="44px"
+                alt="weather forecast icon"
+              />
             </div>
             <div class="col-4">
               <p class="snow">3°C | -3°C</p>
             </div>
           </div>
           <div class="row">
-            <div class="col-2"></div>
-            <div class="col-5">Friday</div>
-            <div class="col-1">
-              <p class="partly-sunny">⛅️</p>
+            <div class="col-1"></div>
+            <div class="col-5 forecast-weekday">Friday</div>
+            <div class="col-2">
+              <img
+                src="https://openweathermap.org/img/wn/09d@2x.png"
+                width="44px"
+                alt="weather forecast icon"
+              />
             </div>
             <div class="col-4">
               <p class="partly-sunny">7°C | 4°C</p>
@@ -142,7 +184,9 @@
           </div>
         </div>
         <p class="float-left">
-          <a class="resource-link" href="https://github.com/karin-mk/SheCodes-Plus-Project"
+          <a
+            class="resource-link"
+            href="https://github.com/karin-mk/SheCodes-Plus-Project"
             >Open-Sourced Code
           </a>
           by Karin Kappler

@@ -135,8 +135,9 @@ a {
   border-color: #d4d4d4;
 }
 
-.col-5 {
+.forecast-weekday {
   color: #9d65c9;
+  text-align: center;
 }
 
 .low-temp {
