@@ -135,33 +135,13 @@ a {
   border-color: #d4d4d4;
 }
 
-.forecast-weekday {
+#forecast {
   color: #9d65c9;
   text-align: center;
 }
 
 .low-temp {
   text-align: left;
-}
-
-.sunny {
-  color: #f8b739;
-}
-
-.cloudy {
-  color: #3a9679;
-}
-
-.rainy {
-  color: #22559c;
-}
-
-.snow {
-  color: #75c2f6;
-}
-
-.partly-sunny {
-  color: #ffa5a5;
 }
 
 .link-align {
