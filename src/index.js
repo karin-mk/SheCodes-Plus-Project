@@ -1,15 +1,13 @@
-function newCity(event) {
-  event.preventDefault();
-  let cityName = citySearch.value;
-  console.log(cityName);
-  city.innerHTML = ` ${citySearch.value}`;
+function newCity(cityName) {
+  let dataInputCity = document.querySelector("#current-city");
+  dataInputCity.innerHTML = ` ${cityName}`;
   switchCity(cityName); 
 }
 
-function switchCity() {
+function switchCity(cityName) {
   let apiKey = `e2786f41f0156622c468940e038a0042`;
-  let weatherData = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch.value}&appid=${apiKey}&units=metric`;
-  let hourlyForecastDate = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearch.value}&cnt=3&appid=${apiKey}&units=metric`;
+  let weatherData = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+  let hourlyForecastDate = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&cnt=3&appid=${apiKey}&units=metric`;
   axios.get(weatherData).then(showWeather);
   axios.get(hourlyForecastDate).then(showHourlyForecast);
 }
@@ -18,19 +16,55 @@ function showWeather(response) {
   let deg = Math.round([response.data.main.temp]);
   let temp = document.querySelector("#degree");
   let humidity = document.querySelector("#humidity-perc");
+  let windSpeed = document.querySelector("#wind-speed");
   let sunset = document.querySelector("#sunset");
   let feelsLikeTemp = document.querySelector("#feels-like-temp");
+  let descriptor = document.querySelector("#weather-description");
   let iconCode = (response.data.weather[0].icon);
   let weatherIcon = document.querySelector("img");
+
+  let changeColor = response.data.weather[0].main
+
+  if (changeColor === "Rain") {
+    city.classList.add("city-rain");
+    city.classList.remove("city-clouds", "city-thunderstorm", "city-drizzle");
+  };
+
+  if (changeColor === "Clouds"){
+    city.classList.add("city-clouds");
+    city.classList.remove("city-rain", "city-thunderstorm", "city-drizzle");
+  };
+
+  if (changeColor === "Thunderstorm"){
+    city.classList.add("city-thunderstorm");
+    city.classList.remove("city-rain", "city-clouds", "city-drizzle");
+  };
+
+  if (changeColor === "Drizzle"){
+    city.classList.add("city-drizzle");
+    city.classList.remove("city-rain", "city-clouds", "city-thunderstorm");
+  };
+
+  if (changeColor !== "Rain" && changeColor !== "Clouds" && changeColor !== "Thunderstorm" && changeColor !== "Drizzle") {
+    city.classList.remove("city-clouds", "city-thunderstorm", "city-drizzle", "city-rain");
+  };
 
   celsiusTemperature = deg;
   temp.innerHTML = `${deg}`;
   humidity.innerHTML = `Humidity: ${[response.data.main.humidity]}%`;
+  windSpeed.innerHTML = `Wind: ${Math.round([response.data.wind.speed])}km/h`;
   feelsLikeTemp.innerHTML = `Feels like: ${Math.round([response.data.main.feels_like])}°C`;
   sunset.innerHTML = sunsetConversion(response.data.sys.sunset * 1000);
+  descriptor.innerHTML = `${response.data.weather[0].description}`;
   weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
 
   getDailyForecast(response.data.coord);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let citySearch = document.querySelector(".form-control");
+  newCity(citySearch.value);
 }
 
 function sunsetConversion(milliseconds) {
@@ -45,6 +79,125 @@ let forecastTime = new Date(milliseconds);
 let forecastHour = forecastTime.getHours();
 return `${forecastHour}:00`
 }
+
+
+
+//Dailyly Forecast
+function formatDay (date) {
+  let dateconversion = new Date(date * 1000);
+  let day = dateconversion.getDay();
+  let days = ["Monday", "Tuesday", "Wednesday", "Thurday", "Friday", "Saturday", "Sunday" ]  
+
+  return days[day];
+}
+
+function buildForecast(response) {
+ 
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  
+  let forecastHTML = "";
+  forecast.forEach(function (dailyForecast, index) {
+    if (index < 5) {
+  forecastHTML = forecastHTML +
+   ` <div class="row">
+        <div class="col-1"></div>
+        <div class="col-4 forecast-weekday">${formatDay(dailyForecast.dt)}</div>
+        <div class="col-2">
+          <img
+            src="https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png"
+            width="44px"
+            alt="weather forecast icon"
+            />
+        </div>
+        <div class="col-4">
+          <p class="sunny">
+            <span class="forecast-temp-max">${Math.round(dailyForecast.temp.max)}°C </span>|
+            <span class="forecast-temp-min"> ${Math.round(dailyForecast.temp.min)}°C</span>
+          </p>
+        </div>
+      </div>
+    `; }
+  });
+
+forecastElement.innerHTML = forecastHTML;          
+}
+
+function getDailyForecast(coordinates) {
+  let myKey = `e2786f41f0156622c468940e038a0042`;
+  let forecastAPI = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={minutely}&appid=${myKey}&units=metric`
+  axios.get(forecastAPI).then(buildForecast);
+}
+
+
+function geoWeather(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let myKey = `e2786f41f0156622c468940e038a0042`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${myKey}&units=metric`;
+  let geoForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=3&appid=${myKey}&units=metric`;
+  axios.get(apiUrl).then(showTemp);
+  axios.get(geoForecastUrl).then(showHourlyForecast);
+}
+
+function showTemp(response) {
+  let geoTemp = Math.round(response.data.main.temp);
+  let heading = document.querySelector("#degree");
+  heading.innerHTML = `${geoTemp}`;
+  city.innerHTML = response.data.name;
+
+  let humidity = document.querySelector("#humidity-perc");
+  let windSpeed = document.querySelector("#wind-speed");
+  let sunset = document.querySelector("#sunset");
+  let feelsLikeTemp = document.querySelector("#feels-like-temp");
+  let descriptor = document.querySelector("#weather-description");
+  let iconCode = (response.data.weather[0].icon);
+  let weatherIcon = document.querySelector("img");
+
+  humidity.innerHTML = `Humidity: ${[response.data.main.humidity]}%`;
+  windSpeed.innerHTML = `Wind: ${Math.round([response.data.wind.speed])}km/h`;
+  feelsLikeTemp.innerHTML = `Feels like: ${Math.round([response.data.main.feels_like])}°C`;
+  sunset.innerHTML = sunsetConversion(response.data.sys.sunset * 1000);
+  descriptor.innerHTML = `${response.data.weather[0].description}`;
+  weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
+
+  getDailyForecast(response.data.coord);
+
+  let changeColor = response.data.weather[0].main;
+
+  if (changeColor === "Rain") {
+    city.classList.add("city-rain");
+    city.classList.remove("city-clouds", "city-thunderstorm", "city-drizzle");
+  };
+
+  if (changeColor === "Clouds"){
+    city.classList.add("city-clouds");
+    city.classList.remove("city-rain", "city-thunderstorm", "city-drizzle");
+  };
+
+  if (changeColor === "Thunderstorm"){
+    city.classList.add("city-thunderstorm");
+    city.classList.remove("city-rain", "city-clouds", "city-drizzle");
+  };
+
+  if (changeColor === "Drizzle"){
+    city.classList.add("city-drizzle");
+    city.classList.remove("city-rain", "city-clouds", "city-thunderstorm");
+  };
+
+  if (changeColor !== "Rain" && changeColor !== "Clouds" && changeColor !== "Thunderstorm" && changeColor !== "Drizzle") {
+    city.classList.remove("city-clouds", "city-thunderstorm", "city-drizzle", "city-rain");
+  };
+
+}
+
+function searchMe() {
+  navigator.geolocation.getCurrentPosition(geoWeather);
+}
+
+let myPosition = document.querySelector("#locate-me");
+myPosition.addEventListener("click", searchMe);
+
 
 function showHourlyForecast(response) {
 let timestampOne = (response.data.list[0].dt * 1000);
@@ -84,124 +237,12 @@ hourlyIconTwo.setAttribute("src", `http://openweathermap.org/img/wn/${timestampT
 hourlyIconThree.setAttribute("src", `http://openweathermap.org/img/wn/${timestampThreeIconCode}@2x.png`);
 }
 
-//Dailyly Forecast
-function formatDay (date) {
-  let dateconversion = new Date(date * 1000);
-  let day = dateconversion.getDay();
-  let days = ["Monday", "Tuesday", "Wednesday", "Thurday", "Friday", "Saturday", "Sunday" ]  
-
-  return days[day];
-
-}
-
-function buildForecast(response) {
- 
-   let forecast = response.data.daily;
-
-  let forecastElement = document.querySelector("#forecast");
-  
-  let forecastHTML = "";
-  forecast.forEach(function (dailyForecast, index) {
-    if (index < 5) {
-  forecastHTML = forecastHTML +
-   ` <div class="row">
-        <div class="col-1"></div>
-        <div class="col-4 forecast-weekday">${formatDay(dailyForecast.dt)}</div>
-        <div class="col-2">
-          <img
-            src="https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png"
-            width="44px"
-            alt="weather forecast icon"
-            />
-        </div>
-        <div class="col-4">
-          <p class="sunny">
-            <span class="forecast-temp-max">${Math.round(dailyForecast.temp.max)}°C </span>|
-            <span class="forecast-temp-min"> ${Math.round(dailyForecast.temp.min)}°C</span>
-          </p>
-        </div>
-      </div>
-    `; }
-  });
-
-forecastElement.innerHTML = forecastHTML;    
-      
-}
-
-function getDailyForecast(coordinates) {
-  let myKey = `e2786f41f0156622c468940e038a0042`;
-  let forecastAPI = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={minutely}&appid=${myKey}&units=metric`
-  axios.get(forecastAPI).then(buildForecast);
-}
-
-
 let city = document.querySelector("#current-city");
-let citySearch = document.querySelector(".form-control");
+
 let changeCity = document.querySelector("form");
-changeCity.addEventListener("submit", newCity);
+changeCity.addEventListener("submit", handleSubmit);
 
-function geoWeather(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  console.log(lat);
-  console.log(lon);
-  let myKey = `e2786f41f0156622c468940e038a0042`;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${myKey}&units=metric`;
-  let geoForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=3&appid=${myKey}&units=metric`;
-  axios.get(apiUrl).then(showTemp);
-  axios.get(geoForecastUrl).then(showHourlyForecast);
-}
-
-function showTemp(response) {
-  let geoTemp = Math.round(response.data.main.temp);
-  let heading = document.querySelector("#degree");
-  heading.innerHTML = `${geoTemp}`;
-  console.log([response.data.name]);
-  city.innerHTML = response.data.name;
-
-  let humidity = document.querySelector("#humidity-perc");
-  let sunset = document.querySelector("#sunset");
-  let feelsLikeTemp = document.querySelector("#feels-like-temp");
-  let iconCode = (response.data.weather[0].icon);
-  let weatherIcon = document.querySelector("img");
-
-  humidity.innerHTML = `Humidity: ${[response.data.main.humidity]}%`;
-  feelsLikeTemp.innerHTML = `Feels like: ${Math.round([response.data.main.feels_like])}°C`;
-  sunset.innerHTML = sunsetConversion(response.data.sys.sunset * 1000);
-  weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
-
-    getDailyForecast(response.data.coord);
-}
-
-function searchMe() {
-  navigator.geolocation.getCurrentPosition(geoWeather);
-}
-
-let myPosition = document.querySelector("#locate-me");
-myPosition.addEventListener("click", searchMe);
-
-//Change Unit
-function convertCelsius(event) {
-  event.preventDefault();
-  temperature.innerHTML = celsiusTemperature;
-  changeCelsius.classList.remove("active");
-  changeFahrenheit.classList.add("active");
-}
-function convertFahrenheit(event) {
-  event.preventDefault();
-  let tempFahrenheit = Math.round((celsiusTemperature * 9) / 5 + 32) ;
-  temperature.innerHTML = tempFahrenheit;
-  changeCelsius.classList.add("active");
-  changeFahrenheit.classList.remove("active");
-}
-
-let celsiusTemperature = null;
-let temperature = document.querySelector("#degree");
-let changeCelsius = document.querySelector("#degree-celsius");
-changeCelsius.addEventListener("click", convertCelsius);
-
-let changeFahrenheit = document.querySelector("#degree-fahrenheit");
-changeFahrenheit.addEventListener("click", convertFahrenheit);
+newCity("Paris");
 
 //Display time
 let time = new Date();
@@ -221,3 +262,9 @@ let weekday = wdays[time.getDay()];
 
 let displayTime = document.querySelector("#time-now");
 displayTime.innerHTML = `${weekday}, ${hours}:${mins}:${secs}`;
+
+if (hours > 20 || hours < 7) {
+  let body = document.querySelector("body");
+  body.classList.add("body-night");
+  body.classList.remove("body-day");
+}

@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width", initial-scale=1.0" />
     <title>Karin's Weather App</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Tangerine:wght@700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300&display=swap"
       rel="stylesheet"
     />
     <link
@@ -19,21 +20,18 @@
     <link rel="stylesheet" href="src/style.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
-  <body>
+  <body class="body-day">
     <div class="container">
       <div class="link-align">
         <div class="box">
           <div class="row">
             <div class="col-6">
-              <h1 id="current-city">Paris</h1>
+              <h1 id="current-city"></h1>
             </div>
             <div class="col-6">
               <h2>
-                <span id="degree">15</span>
-                <small>
-                  <a href="#" class="active" id="degree-celsius">°C</a> |
-                  <a href="#" id="degree-fahrenheit">°F</a></small
-                >
+                <span id="degree"></span>
+                <small>°C</small>
                 <img
                   src="https://openweathermap.org/img/wn/10d@2x.png"
                   alt="weather icon"
@@ -41,11 +39,15 @@
               </h2>
             </div>
           </div>
+          <hr />
+          <p id="weather-description"></p>
           <ul>
             <li id="feels-like-temp">Feels like</li>
+            <li id="wind-speed">Wind</li>
             <li id="humidity-perc">Humidity</li>
             <li id="sunset">Sunset</li>
           </ul>
+
           <p id="time-now"></p>
           <br />
           <div class="row today">
@@ -53,8 +55,8 @@
               <div class="card">
                 <div class="card-body">
                   <p>
-                    <strong id="timestamp-1">2pm</strong> <br />
-                    <span id="hourly-forecast-temp-1">16°C</span>
+                    <strong id="timestamp-1">2:00</strong> <br />
+                    <span id="hourly-forecast-temp-1"></span>
                     <img
                       id="hourly-forecast-icon-1"
                       src="https://openweathermap.org/img/wn/09d@2x.png"
@@ -69,8 +71,8 @@
               <div class="card">
                 <div class="card-body">
                   <p>
-                    <strong id="timestamp-2">5pm</strong> <br />
-                    <span id="hourly-forecast-temp-2">14°C</span>
+                    <strong id="timestamp-2">5:00</strong> <br />
+                    <span id="hourly-forecast-temp-2"></span>
                     <img
                       id="hourly-forecast-icon-2"
                       src="https://openweathermap.org/img/wn/09d@2x.png"
@@ -85,8 +87,8 @@
               <div class="card">
                 <div class="card-body">
                   <p>
-                    <strong id="timestamp-3">8pm</strong> <br />
-                    <span id="hourly-forecast-temp-3">11°C</span>
+                    <strong id="timestamp-3">8:00</strong> <br />
+                    <span id="hourly-forecast-temp-3"></span>
                     <img
                       id="hourly-forecast-icon-3"
                       src="https://openweathermap.org/img/wn/09d@2x.png"
