@@ -81,7 +81,6 @@ return `${forecastHour}:00`
 }
 
 
-
 //Dailyly Forecast
 function formatDay (date) {
   let dateconversion = new Date(date * 1000);
@@ -195,10 +194,6 @@ function searchMe() {
   navigator.geolocation.getCurrentPosition(geoWeather);
 }
 
-let myPosition = document.querySelector("#locate-me");
-myPosition.addEventListener("click", searchMe);
-
-
 function showHourlyForecast(response) {
 let timestampOne = (response.data.list[0].dt * 1000);
 let timestampTwo = (response.data.list[1].dt * 1000);
@@ -242,6 +237,9 @@ let city = document.querySelector("#current-city");
 let changeCity = document.querySelector("form");
 changeCity.addEventListener("submit", handleSubmit);
 
+let myPosition = document.querySelector("#locate-me");
+myPosition.addEventListener("click", searchMe);
+
 newCity("Paris");
 
 //Display time
@@ -262,9 +260,13 @@ let weekday = wdays[time.getDay()];
 
 let displayTime = document.querySelector("#time-now");
 displayTime.innerHTML = `${weekday}, ${hours}:${mins}:${secs}`;
+let body = document.querySelector("body");
+
 
 if (hours > 20 || hours < 7) {
-  let body = document.querySelector("body");
   body.classList.add("body-night");
   body.classList.remove("body-day");
-}
+} else {
+  body.classList.add("body-day");
+  body.classList.remove("body-night");  
+};
