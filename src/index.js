@@ -56,7 +56,7 @@ function showWeather(response) {
   feelsLikeTemp.innerHTML = `Feels like: ${Math.round([response.data.main.feels_like])}°C`;
   sunset.innerHTML = sunsetConversion(response.data.sys.sunset * 1000);
   descriptor.innerHTML = `${response.data.weather[0].description}`;
-  weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
+  weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${iconCode}@2x.png`);
 
   getDailyForecast(response.data.coord);
 }
@@ -227,9 +227,9 @@ let hourlyIconOne = document.querySelector("#hourly-forecast-icon-1");
 let hourlyIconTwo = document.querySelector("#hourly-forecast-icon-2");
 let hourlyIconThree = document.querySelector("#hourly-forecast-icon-3");
 
-hourlyIconOne.setAttribute("src", `http://openweathermap.org/img/wn/${timestampOneIconCode}@2x.png`);
-hourlyIconTwo.setAttribute("src", `http://openweathermap.org/img/wn/${timestampTwoIconCode}@2x.png`);
-hourlyIconThree.setAttribute("src", `http://openweathermap.org/img/wn/${timestampThreeIconCode}@2x.png`);
+hourlyIconOne.setAttribute("src", `https://openweathermap.org/img/wn/${timestampOneIconCode}@2x.png`);
+hourlyIconTwo.setAttribute("src", `https://openweathermap.org/img/wn/${timestampTwoIconCode}@2x.png`);
+hourlyIconThree.setAttribute("src", `https://openweathermap.org/img/wn/${timestampThreeIconCode}@2x.png`);
 }
 
 let city = document.querySelector("#current-city");
