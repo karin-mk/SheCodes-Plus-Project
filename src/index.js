@@ -158,7 +158,7 @@ function showTemp(response) {
   feelsLikeTemp.innerHTML = `Feels like: ${Math.round([response.data.main.feels_like])}°C`;
   sunset.innerHTML = sunsetConversion(response.data.sys.sunset * 1000);
   descriptor.innerHTML = `${response.data.weather[0].description}`;
-  weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${iconCode}@2x.png`);
+  weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${iconCode}@2x.png`);
 
   getDailyForecast(response.data.coord);
 
